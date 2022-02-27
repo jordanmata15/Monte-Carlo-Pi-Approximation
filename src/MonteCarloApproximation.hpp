@@ -3,7 +3,6 @@
 #include <cmath>
 #include <omp.h>
 #include <random>
-#include "ArgParser.hpp"
 
 class MonteCarloApproximation {
   private:
