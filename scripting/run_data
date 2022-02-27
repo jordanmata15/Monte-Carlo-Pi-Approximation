@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Where to redirect build messages
+BUILD_OUTPUT="/dev/null"
+#BUILD_OUTPUT=/dev/stdout
+
+EXE="MonteCarloApproximation"
+SRC_DIR="../src"
+BUILD_DIR"../build"
+DATA_FILES="../data"
+PLOT_FILES="../plotting"
+
+
+echo "*******************************************"
+echo "          Recompiling files                "
+echo "*******************************************"
+make -C $SRC_DIR > $BUILD_OUTPUT
+$BUILD_DIR/$EXE -n 1 -p 100000
+echo

@@ -1,14 +1,21 @@
 PROGRAM=MonteCarloApproximation
 CXX=g++
 CXXFLAGS=-std=c++11 -g -Wall -fopenmp
-OBJS=$(PROGRAM).o ArgParser.o
 
-$(PROGRAM):	$(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(PROGRAM)
+# keep our cpp/hpp files separate from .o and executable
+SRCDIR=.
+BUILD=../build
 
-$(PROGRAM).o: $(PROGRAM).cpp $(PROGRAM).hpp
+# https://stackoverflow.com/questions/48267813/makefile-compile-objects-to-different-directory-and-build-from-there
+SRC:=$(shell find $(SRCDIR)/ -name "*.cpp")
+OBJS:=$(SRC:%.cpp=$(BUILD)/%.o)
 
-ArgParser.o: ArgParser.cpp ArgParser.hpp
+
+$(BUILD)/$(PROGRAM):	$(OBJS)
+	$(CXX) $(CXXFLAGS) $(BUILD)/$(OBJS) -o $(BUILD)/$(PROGRAM)
+
+$(BUILD)/%.o: $(SRCDIR)/%.cpp $(SRCDIR)/%.hpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -rf $(OBJS) core $(PROGRAM) *.log
+	rm -rf $(BUILD)/core* $(OBJS) $(BUILD)/$(PROGRAM) *.log
