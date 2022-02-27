@@ -50,10 +50,11 @@ class ArgParser {
     ~ArgParser(){ delete args; }
 
     /**
-     * Method used to verify all arguments are valid. For any invalid, it will
-     * call prompt() to have the user try to populate them. If any arguments are
-     * incorrect, ALL inputs are reset and the user is reprompted.
-     *
+     * Method used to parse the flags from the user. Validates integer arguments
+     * and exits if invalid.
+     * 
+     * @param argc The argument count provided to main().
+     * @param argv The argument list provided to main().
      * @return A pointer to an argument structure from which the user inputs
      *         can be read.
      */
