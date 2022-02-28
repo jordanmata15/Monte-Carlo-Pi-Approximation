@@ -18,10 +18,8 @@ echo "          Recompiling files                " > $BUILD_OUTPUT
 echo "*******************************************" > $BUILD_OUTPUT
 make -C $SRC_DIR > $BUILD_OUTPUT
 
-# clear out old files
-rm -rf $DATA_FILES/*
-
-echo "num_threads,num_random_points,pi_approximation,time_elapsed" > $DATA_FILES/times.txt
+# overwrite old files with new header
+echo "num_threads,num_random_points,pi_approximation,time_elapsed" > $DATA_FILES/times.csv
 
 NUM_THREADS=(1 2 4 8 16 32 64 128 256 512)
 for thread_num in ${NUM_THREADS[@]}
@@ -32,7 +30,7 @@ do
     do
         #$BUILD_DIR/$EXE -n $thread_num -p $points > $DATA_FILES/threads_$thread_num/$points.txt
         TIME_OUTPUT=$($BUILD_DIR/$EXE -n $thread_num -p $points)
-        echo "$thread_num,$points,$TIME_OUTPUT" >>  $DATA_FILES/times.txt
+        echo "$thread_num,$points,$TIME_OUTPUT" >>  $DATA_FILES/times.csv
     done
 
 done
