@@ -8,6 +8,7 @@ double MonteCarloApproximation::runApproximation(){
 
   struct timeval startTime, endTime, elapsedTime;
   gettimeofday(&startTime, NULL);
+
   #pragma omp parallel for private(x,y) reduction(+:innerCount) num_threads(this->numThreads)
   for (int i=0; i<this->pointsToPlot; ++i){
     // https://stackoverflow.com/questions/29709897/c-thread-safe-uniform-distribution-random-number-generation
@@ -19,6 +20,7 @@ double MonteCarloApproximation::runApproximation(){
     y = uniform_dist(generator);
     if (this->isWithinUnitDistance(x,y)) ++innerCount;
   }
+  
   gettimeofday(&endTime, NULL);
   timersub(&endTime, &startTime, &elapsedTime);
   timeManager->recordTime(&elapsedTime);
