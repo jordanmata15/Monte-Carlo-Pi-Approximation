@@ -25,7 +25,7 @@ NUM_THREADS=(1 2 4 8 16 32 64 128 256 512)
 for thread_num in ${NUM_THREADS[@]}
 do
     #mkdir $DATA_FILES/threads_$thread_num
-    NUM_POINTS=(1000 10000 100000 1000000 10000000 100000000)
+    NUM_POINTS=(100 1000 10000 100000 1000000 10000000 100000000)
     for points in ${NUM_POINTS[@]}
     do
         #$BUILD_DIR/$EXE -n $thread_num -p $points > $DATA_FILES/threads_$thread_num/$points.txt
