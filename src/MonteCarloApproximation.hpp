@@ -1,11 +1,12 @@
-#include <stdlib.h>
-#include <cmath>
 #include <omp.h>
 #include <random>
 #include <sys/time.h>
 #include "DataManager.hpp"
 
-
+/**
+ * @brief Simulation of Monte-Carlo algorithm for generating pi using parallelization.
+ * 
+ */
 class MonteCarloApproximation {
   private:
     double radius;
@@ -13,6 +14,14 @@ class MonteCarloApproximation {
     int pointsToPlot;
     DataManager* timeManager;
 
+    /**
+     * @brief Check if the x/y values are within the euclidean distance of our radius.
+     * 
+     * @param x The x coordinate
+     * @param y The y coordinate
+     * @return true When the x/y have a eudlidean distance less than radius.
+     * @return false Otherwise.
+     */
     bool isWithinUnitDistance(double x, double y);
 
   public:

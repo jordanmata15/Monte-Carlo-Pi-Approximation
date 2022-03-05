@@ -28,7 +28,7 @@ Arguments* ArgParser::parseArgs(int argc, char** argv){
 
       case 'p':
         args->numPoints = this->readInt(option, optarg);
-        if (args->numThreads <= 0){
+        if (args->numPoints <= 0){
           fprintf(stderr,"Flag -%c expects an integer input greater than 0. Found: '%s'\n", option, optarg);
           printUsage();
           exit(1);
