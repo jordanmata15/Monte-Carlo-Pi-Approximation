@@ -7,8 +7,7 @@ int ArgParser::readInt(char flag, char* value){
   int intValue = strtol(value, &end, 10);
   while (isspace(*end)) ++end;
   if (errno || *end) {
-      fprintf(stderr,"Flag -%c expects an integer input. Found: '%s'\n", flag, value);
-      exit(2);
+      return -1;
   }
   return intValue;
 }
@@ -20,10 +19,22 @@ Arguments* ArgParser::parseArgs(int argc, char** argv){
     switch(option){
       case 'n':
         args->numThreads = this->readInt(option, optarg);
+        if (args->numThreads <= 0){
+          fprintf(stderr,"Flag -%c expects an integer input greater than 0. Found: '%s'\n", option, optarg);
+          printUsage();
+          exit(1);
+        }
         break;
+
       case 'p':
         args->numPoints = this->readInt(option, optarg);
+        if (args->numThreads <= 0){
+          fprintf(stderr,"Flag -%c expects an integer input greater than 0. Found: '%s'\n", option, optarg);
+          printUsage();
+          exit(1);
+        }
         break;
+      
       case '?':
         printUsage();
         exit(1);
