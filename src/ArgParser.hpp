@@ -7,7 +7,9 @@
 
 #define DEFAULT_THREADS 1
 #define DEFAULT_POINTS 1000000
-#define USAGE ""
+#define USAGE "\nusage: ./MonteCarloApproximation -n NUMTHREADS -p NUMPOINTS\n"\
+              "\t-n optional flag that reads in NUMTHREADS (NUMTHREADS > 0, integer)\n"\
+              "\t-p optional flag that reads in NUMPOINTS (NUMPOINTS > 0, integer)\n"
 
 /**
  * Arguments object to hold the values of the desired inputs given by the user.
