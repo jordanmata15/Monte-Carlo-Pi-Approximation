@@ -11,8 +11,9 @@ class MonteCarloApproximation {
     double radius;
     int numThreads;
     int pointsToPlot;
-    bool isWithinUnitDistance(double x, double y);
     DataManager* timeManager;
+
+    bool isWithinUnitDistance(double x, double y);
 
   public:
     /**
@@ -22,10 +23,10 @@ class MonteCarloApproximation {
      * @param pointsToPlot The number of random data points to generate for more accurate results.
      * @param manager The data manager for recording the time of the algorithm.
      */
-    MonteCarloApproximation(int numThreads, int pointsToPlot, DataManager* manager): numThreads(numThreads), 
+    MonteCarloApproximation(int numThreads, int pointsToPlot, DataManager* manager): radius(1),
+                                                                                      numThreads(numThreads), 
                                                                                       pointsToPlot(pointsToPlot),
-                                                                                      timeManager(manager),
-                                                                                      radius(1){}
+                                                                                      timeManager(manager){}
     
     /**
      * @brief Run the approximation algorithm and record the time elapsed in our timeManager.
