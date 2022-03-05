@@ -8,7 +8,7 @@ int main(int argc, char** argv){
 
   MonteCarloApproximation mca = MonteCarloApproximation(args->numThreads, args->numPoints, &manager);
   
-  std::cout << mca.runApproximation() << "," << manager.average() << std::endl;
+  std::cout << std::fixed << std::setprecision(10) << mca.runApproximation() << "," << manager.average() << std::endl;
 
   return 0;
 }
