@@ -1,6 +1,7 @@
 PROGRAM=MonteCarloApproximation
 CXX=g++
-CXXFLAGS=-std=c++11 -g -Wall -fopenmp
+CXXFLAGS=-std=c++11 -g -Wall
+LDLIBS=-fopenmp
 
 # keep our cpp/hpp files separate from .o and executable
 SRCDIR=.
@@ -12,10 +13,10 @@ OBJS:=$(SRC:%.cpp=$(BUILD)/%.o)
 
 
 $(BUILD)/$(PROGRAM):	$(OBJS)
-	$(CXX) $(CXXFLAGS) $(BUILD)/$(OBJS) -o $(BUILD)/$(PROGRAM)
+	$(CXX) $(CXXFLAGS) $(BUILD)/$(OBJS) -o $(BUILD)/$(PROGRAM) ${LDLIBS}
 
 $(BUILD)/%.o: $(SRCDIR)/%.cpp $(SRCDIR)/%.hpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $< ${LDLIBS}
 
 clean:
-	rm -rf $(BUILD)/core* $(OBJS) $(BUILD)/$(PROGRAM) *.log
+	rm -rf $(BUILD)/core* $(OBJS) $(BUILD)/$(PROGRAM)
