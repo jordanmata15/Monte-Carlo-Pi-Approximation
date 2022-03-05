@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# Script to automate building the source files and automate our tests/plotting
+
 # Where to redirect build messages
 BUILD_OUTPUT="/dev/null"
 #BUILD_OUTPUT=/dev/stdout
 
-PACKAGE_DIR="/home/jmata/CS605/Monte-Carlo-Pi-Approximation/Monte-Carlo-Pi-Approximation"
+PACKAGE_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/.."
 
 SRC_DIR="$PACKAGE_DIR/src"
 BUILD_DIR="$PACKAGE_DIR/build"
@@ -16,7 +18,7 @@ EXE="MonteCarloApproximation"
 echo "*******************************************" > $BUILD_OUTPUT
 echo "          Recompiling files                " > $BUILD_OUTPUT
 echo "*******************************************" > $BUILD_OUTPUT
-make -C $SRC_DIR > $BUILD_OUTPUT
+make -C $SRC_DIR > $BUILD_OUTPUT > $BUILD_OUTPUT
 
 # overwrite old files with new header
 echo "num_threads,num_random_points,pi_approximation,time_elapsed" > $DATA_FILES/times.csv
@@ -24,11 +26,9 @@ echo "num_threads,num_random_points,pi_approximation,time_elapsed" > $DATA_FILES
 NUM_THREADS=(1 2 4 8 16 32 64 128 256 512)
 for thread_num in ${NUM_THREADS[@]}
 do
-    #mkdir $DATA_FILES/threads_$thread_num
     NUM_POINTS=(100 1000 10000 100000 1000000 10000000 100000000)
     for points in ${NUM_POINTS[@]}
     do
-        #$BUILD_DIR/$EXE -n $thread_num -p $points > $DATA_FILES/threads_$thread_num/$points.txt
         TIME_OUTPUT=$($BUILD_DIR/$EXE -n $thread_num -p $points)
         echo "$thread_num,$points,$TIME_OUTPUT" >>  $DATA_FILES/times.csv
     done
