@@ -26,6 +26,7 @@ double MonteCarloApproximation::runApproximation(){
   return 4*(innerCount/this->pointsToPlot);
 }
 
+
 bool MonteCarloApproximation::isWithinUnitDistance(double x, double y){
   return sqrt((x*x)+(y*y)) <= this->radius;
 }
