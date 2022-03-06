@@ -32,5 +32,6 @@ do
         TIME_OUTPUT=$($BUILD_DIR/$EXE -n $thread_num -p $points)
         echo "$thread_num,$points,$TIME_OUTPUT" >>  $DATA_FILES/times.csv
     done
-
 done
+
+python3 $PACKAGE_DIR/scripting/plot_data.py

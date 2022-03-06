@@ -1,7 +1,6 @@
 import pandas as pd
-import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FormatStrFormatter, StrMethodFormatter
+from matplotlib.ticker import FormatStrFormatter
 import math
 import os
 import sys
