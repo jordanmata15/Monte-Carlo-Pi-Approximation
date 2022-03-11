@@ -18,4 +18,4 @@ The following flags can be passed in when running the binary to manually set the
 
 eg. <br>
 The following will approximate pi with 1000 random points and split the work to 8 threads.<br>
-./IntegralApproximation -p 8 -n 1000
+./MonteCarloApproximation -p 8 -n 1000
