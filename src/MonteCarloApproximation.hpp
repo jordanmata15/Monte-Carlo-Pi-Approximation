@@ -1,4 +1,6 @@
-#include <omp.h>
+#ifndef __MONTE_CARLO_APPROXIMATION_HPP__
+#define __MONTE_CARLO_APPROXIMATION_HPP__
+
 #include <random>
 #include <sys/time.h>
 #include "DataManager.hpp"
@@ -44,3 +46,5 @@ class MonteCarloApproximation {
      */
     double runApproximation();
 };
+
+#endif // __MONTE_CARLO_APPROXIMATION_HPP__
