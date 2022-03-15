@@ -5,26 +5,34 @@ import math
 import os
 import sys
 
-path_to_script = os.path.dirname(__file__)
+# global setting for applying grids to all plots
+plt.rcParams['axes.grid'] = True
 
+path_to_script = os.path.dirname(__file__)
 data_path = os.path.join(path_to_script, "../data") # data folder relative to this script
 data_filename = os.path.join(data_path, "times.csv")
 
 
 def crunch_data(filename):
-    # num_threads, num_random_points, pi_approximation, time_elapsed
+    """Plots our graphs.
+
+    :param filename: The times.csv file with the following columns:
+                        num_threads, num_random_points, pi_approximation, time_elapsed 
+    """
     df = pd.read_csv(filename)
     df["approximation_error"] = (abs(df["pi_approximation"]-math.pi)/math.pi) * 100
     
-    # create our plots
     plot_threads_to_time(df[['num_threads','num_random_points', 'time_elapsed']])
     plot_points_to_accuracy(df[['approximation_error','num_random_points']])
 
 
-"""
-Plot number of threads to the time elapsed. One line for each data size. 
-"""
+
 def plot_threads_to_time(times_df):
+    """Plot number of threads to the time elapsed. One line for each data size.
+    
+    :param times_df: A pandas dataframe with columns 
+                        ['num_threads','num_random_points', 'time_elapsed']
+    """
     sizes = times_df["num_random_points"].unique()
 
     # format the plot
@@ -45,10 +53,12 @@ def plot_threads_to_time(times_df):
     fig.savefig(os.path.join(data_path, "Plot_Threads_Time.pdf"), bbox_inches = "tight")
 
 
-"""
-Plot number of threads to the time elapsed. One line for each data size. 
-"""
 def plot_points_to_accuracy(times_df):
+    """Plot number of random points to accuracy.
+    
+    :param times_df: A pandas dataframe with columns 
+                        ['approximation_error','num_random_points']
+    """
     df = times_df.groupby("num_random_points").mean()
     df.reset_index(inplace=True)
 
@@ -75,6 +85,10 @@ def plot_points_to_accuracy(times_df):
 
 
 if __name__=="__main__":
+    """Runs the plots for our dataset.
+
+    :param argv[1]: The name of the csv file to read from (in the data/ folder).
+    """
     if len(sys.argv) > 1:
         data_filename = sys.argv[1]
 
